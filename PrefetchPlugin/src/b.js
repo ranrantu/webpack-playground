@@ -1,4 +1,4 @@
 import 'react';
-import C from './c';
+// import C from './c';
 
 export default 'b';
