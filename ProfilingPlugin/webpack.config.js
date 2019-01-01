@@ -23,8 +23,9 @@ module.exports = {
         filename:'index.html',
         template:'./src/index.html'
     }),
-    new webpack.PrefetchPlugin('./node_modules/react/index.js'),
-    new webpack.PrefetchPlugin('./node_modules/react-dom/index.js'),
-	  // new webpack.PrefetchPlugin(path.join(__dirname, './src/components/nav.js'))
+    new webpack.debug.ProfilingPlugin(),
+    // new webpack.debug.ProfilingPlugin({
+    //   outputPath: 'profiling/profileEvents.json'
+    // });
   ]
 }

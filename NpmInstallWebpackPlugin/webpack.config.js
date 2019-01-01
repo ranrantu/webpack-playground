@@ -1,6 +1,5 @@
+const NpmInstallPlugin = require('webpack-plugin-install-deps');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
 	entry: './src/index.js',
@@ -23,8 +22,16 @@ module.exports = {
         filename:'index.html',
         template:'./src/index.html'
     }),
-    new webpack.PrefetchPlugin('./node_modules/react/index.js'),
-    new webpack.PrefetchPlugin('./node_modules/react-dom/index.js'),
-	  // new webpack.PrefetchPlugin(path.join(__dirname, './src/components/nav.js'))
+    // new NpmInstallPlugin(),
+    new NpmInstallPlugin({
+    	dev: function (module, path) {
+    		console.log(module, path);
+    		return [
+	        "babel-preset-react-hmre",
+	        "webpack-dev-middleware",
+	        "webpack-hot-middleware",
+	      ].indexOf(module) !== -1;
+    	}
+    })
   ]
 }

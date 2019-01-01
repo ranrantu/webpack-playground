@@ -1,1 +1,1 @@
-import a from './a.js';
+import App from './a';

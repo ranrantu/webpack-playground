@@ -2,6 +2,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
+const handler = (percentage, message, ...args) => {
+  // e.g. Output each progress message directly to the console:
+  console.info(percentage, message, ...args);
+};
+
 module.exports = {
 	entry: './src/index.js',
 	module:{
@@ -23,8 +28,6 @@ module.exports = {
         filename:'index.html',
         template:'./src/index.html'
     }),
-    new webpack.PrefetchPlugin('./node_modules/react/index.js'),
-    new webpack.PrefetchPlugin('./node_modules/react-dom/index.js'),
-	  // new webpack.PrefetchPlugin(path.join(__dirname, './src/components/nav.js'))
+    new webpack.ProgressPlugin(handler)
   ]
 }

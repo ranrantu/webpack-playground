@@ -1,3 +1,36 @@
+# NpmInstallWebpackPlugin
+
+通过自动安装和保存依赖，来提高开发效率的插件。
+
+当使用require和import的时候，会自动执行npm install来安装缺少的依赖。
+
+#### 安装
+
+```sh
+$ npm install --save-dev npm-install-webpack-plugin
+```
+
+#### 使用
+
+```js
+plugins: [
+  new NpmInstallPlugin()
+]
+// 等同于
+plugins: [
+  new NpmInstallPlugin({
+    // 使用 --save 还是 --save-dev
+    dev: false,
+    // 安装缺省的同伴依赖
+    peerDependencies: true,
+    // 减少日志的打印
+    quiet: false,
+    // 在内部使用npm，还不支持yarn
+    npm: 'tnpm' -> 'npm'
+  });
+]
+```
+
 # PrefetchPlugin
 
 预取出普通的模块请求(module request)，可以让这些模块在他们被 import 或者是 require 之前就解析并且编译。使用这个预取插件可以提升性能。可以多试试在编译前记录时间(profile)来决定最佳的预取的节点。
@@ -12,6 +45,8 @@ new webpack.PrefetchPlugin([context], request);
 
 - ```context``` 文件夹的绝对路径
 - ```request``` 普通模块的 request 字符串
+
+http://webpack.github.io/analyse/#hints
 
 # ProfilingPlugin
 

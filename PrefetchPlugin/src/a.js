@@ -1,3 +1,4 @@
-import b from './b.js'
+import B from './b';
+import D from './d';
 
 export default 'a';

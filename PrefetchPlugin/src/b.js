@@ -1,3 +1,4 @@
-import c from './c.js';
+import 'react';
+import C from './c';
 
 export default 'b';
