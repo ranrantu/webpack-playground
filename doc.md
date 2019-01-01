@@ -1,8 +1,10 @@
 # NpmInstallWebpackPlugin
 
-通过自动安装和保存依赖，来提高开发效率的插件。
+通过”自动安装“并”保存依赖“提高开发效率。
 
-当使用require和import的时候，会自动执行npm install来安装缺少的依赖。
+通过Ctrl-C去复制一些构建脚本添加那些你也不清楚的依赖是低效的。
+
+取而代之，使用这个插件我们可以像往常一样使用require和import，那些缺少的依赖会自动的被安装。
 
 #### 安装
 
@@ -28,6 +30,22 @@ plugins: [
     // 在内部使用npm，还不支持yarn
     npm: 'tnpm' -> 'npm'
   });
+]
+```
+
+你也可以给dev属性传入一个Function，让它动态的进行判断
+
+```js
+plugins: [
+  new NpmInstallPlugin({
+    dev: function(module, path) {
+      return [
+        "babel-preset-react-hmre",
+        "webpack-dev-middleware",
+        "webpack-hot-middleware",
+      ].indexOf(module) !== -1;
+    },
+  }),
 ]
 ```
 
