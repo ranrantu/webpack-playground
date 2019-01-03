@@ -186,11 +186,35 @@ new webpack.SourceMapDevToolPlugin(options);
 
 ### 选项
 
-- ```test(string|regex|array)``` 包含基于扩展名的模块的 source map（默认是 .js 和 .css）
-- ```include(string|regex|array)``` 使路径与该值匹配的模块生成 source map
-- 
+- ```test(string|regex|array)``` 匹配并生成相关模块的sourcemap（默认支持```.js```，```.mjs```，和```.css```）
+- ```include(string|regex|array)``` 匹配的模块为其生成sourcemap
+- ```exclude(string|regex|array)``` 匹配的模块不为其生成sourcemap
+- ```filename(string)``` 定义输出的sourcemap的文件名（默认是内联的base64字符）
+- ```append(string)``` 打印给定的文件源地址，通常是以```#sourceMappingURL```添加注释，```[url]```会被替换成sourcemap文件名，```false```会取消打印文件源地址
+- ```moduleFilenameTemplate(string)``` 
+- ```module(boolean)``` 表示loader是否生成source map（默认为```true```）
+- ```columns(boolean)``` 是否支持列映射（默认为```true```）
+- ```noSources(boolean)``` 防止源文件的内容被包含在 source map 里（默认为 ```false```）。
+- ```publicPath(string)``` 生成带 public path 前缀的绝对 URL，例如：```https://example.com/project/```。
+- ```fileContext(string)``` 使得 [file] 参数作为本目录的相对路径。
+
+> 如果在开发模式下使用自定义配置，需要手动将devtool设置为false，即```devtool: false```
 
 ### 使用
+
+### 基本用法
+
+如下的配置等价于```devtool: inline-source-map```
+
+```js
+module.exports = {
+  // ...
+  devtool: false,
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({})
+  ]
+};
+```
 
 ### 排除 vendor 的 map
 
@@ -240,23 +264,3 @@ new webpack.SourceMapDevToolPlugin({
 ```js
 https://example.com/project/sourcemaps/bundle-[hash].js.map
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
